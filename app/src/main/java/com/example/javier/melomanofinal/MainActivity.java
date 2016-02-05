@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity  implements ListGenero.OnDis
 
         } else {
             Intent intent = new Intent (this,DetalleActivity.class);
-            intent.putExtra("genero", (Parcelable) genero);
+            intent.putExtra("genero",  genero);
             startActivity(intent);}
     }
 }
