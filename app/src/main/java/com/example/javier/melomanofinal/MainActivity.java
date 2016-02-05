@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity  implements ListGenero.OnDisciplineSelectedListener {
 
@@ -11,11 +12,13 @@ public class MainActivity extends AppCompatActivity  implements ListGenero.OnDis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
     }
     public void onDisciplineSelected(Genero genero) {
-        // TODO - if a discipline is selected, we should do something with it (show it maybe?)
-        /* TODO - Si una disciplina se selecciona, debemos hacer algo con ella, como mostrarla en
-                  otro fragment o abrir un nuevo activity.. */
+
         boolean dual_pane = getResources().getBoolean(R.bool.dual_plane);
         if(dual_pane){
             MuestraCancionFragment fragment = (MuestraCancionFragment) getSupportFragmentManager().findFragmentById(R.id.detalleFragment);
