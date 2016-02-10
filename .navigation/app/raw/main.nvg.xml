@@ -6,10 +6,18 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.example.javier.melomanofinal.PrincipalActivity"/>
+      <point      
+        x = "-8"      
+        y = "160"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
         className = "com.example.javier.melomanofinal.MainActivity"/>
       <point      
-        x = "680"      
-        y = "248"/>
+        x = "1552"      
+        y = "68"/>
     </statePointEntry>
     <statePointEntry>
       <state      
