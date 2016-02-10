@@ -18,7 +18,7 @@ public class MuestraCancionFragment extends Fragment {
         return view;
     }
     public void setDiscipline(Genero genero) {
-        ((TextView)getView().findViewById(R.id.mestraDetalle)).setText(genero.getNombre());
+        ((TextView)getView().findViewById(R.id.GeneroSeleccionado)).setText(genero.getNombre());
 
     }
 }

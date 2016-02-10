@@ -10,12 +10,15 @@ public class Genero implements Parcelable {
     public String nombre;
 
 
+
     public Genero(String nombre){
         this.nombre=nombre;
+
     }
 
     protected Genero(Parcel in) {
         nombre = in.readString();
+
     }
 
     public static final Creator<Genero> CREATOR = new Creator<Genero>() {
@@ -30,7 +33,12 @@ public class Genero implements Parcelable {
         }
     };
 
+
     public String getNombre(){return nombre;}
+
+
+
+
 
 
     public void setNombre(String nombre) {
@@ -38,6 +46,7 @@ public class Genero implements Parcelable {
     }
     public String toString() {
         return getNombre();
+
     }
 
     @Override
