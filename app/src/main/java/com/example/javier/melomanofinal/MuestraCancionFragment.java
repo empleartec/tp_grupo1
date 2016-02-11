@@ -11,6 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+
+
 /**
  * Created by Javier on 04/02/2016.
  */
@@ -59,6 +62,10 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
 
             }
             else {
+                this.Puntajety.setText("incorrecto");
+                tiempoDeEspera();
+                LimpiarCampos();
+
 
             }
         }
