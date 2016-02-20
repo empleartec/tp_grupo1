@@ -47,7 +47,7 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
 
     }
 
-    @Override
+
     public void onClick(View view) {
         if (botonOk == view) {
             int id = 555;
@@ -62,7 +62,7 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
 
             }
             else {
-                this.Puntajety.setText("incorrecto");
+                this.Puntaje.setText("incorrecto");
                 tiempoDeEspera();
                 LimpiarCampos();
 
@@ -91,15 +91,7 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
 
         String nom = this.palabraIngresada.getText().toString();
 
-
-        if (nom.equals("hola") )
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return nom.equals("hola");
     }
 
 

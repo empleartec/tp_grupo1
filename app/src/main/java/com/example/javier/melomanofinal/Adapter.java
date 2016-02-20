@@ -46,7 +46,7 @@ public class Adapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = LayoutInflater.from(context.getContext()).inflate(R.layout.item, parent, false);
+        View view = LayoutInflater.from(context.getActivity()).inflate(R.layout.item, parent, false);
         final Genero genero = getItem(position);
         setContenido(view, genero);
         setOnClick(view, genero);

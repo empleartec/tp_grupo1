@@ -1,5 +1,6 @@
 package com.example.javier.melomanofinal;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -24,7 +25,7 @@ public class ListGenero extends Fragment {
                 container, false);
 
         ListView lista = (ListView) view.findViewById(R.id.listageneros);
-        Adapter listaAdaptada = new Adapter( this, GeneroStore.getAll(this.getContext()));
+        Adapter listaAdaptada = new Adapter( this, GeneroStore.getAll(this.getActivity()));
         lista.setAdapter(listaAdaptada);
         return view;
     }
@@ -41,7 +42,7 @@ public class ListGenero extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(Activity context) {
         super.onAttach(context);
         if (context instanceof OnDisciplineSelectedListener) {
             listener = (OnDisciplineSelectedListener) context;
