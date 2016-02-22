@@ -7,11 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-
 
 
 /**
@@ -24,6 +20,11 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
     Button botonOk;
     private TextView Puntaje;
     private int puntaje2;
+    Button opcion1;
+    Button opcion2;
+    Button opcion3;
+    Button opcion4;
+    int x;
 
 
 
@@ -37,61 +38,158 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
         ((TextView)getView().findViewById(R.id.GeneroSeleccionado)).setText(genero.getNombre());
        this.texto= ((TextView)getView().findViewById(R.id.GeneroSeleccionado));
         this.palabraIngresada= ((EditText)getView().findViewById(R.id.editText));
-        this.botonOk=((Button)getView().findViewById(R.id.BotonOk));
-        botonOk.setOnClickListener(this);
+        this.opcion1=((Button)getView().findViewById(R.id.opcion));
+        opcion1.setOnClickListener(this);
+        this.opcion2 =((Button)getView().findViewById(R.id.opcionDos));
+        opcion2.setOnClickListener(this);
+        this.opcion3 =((Button)getView().findViewById(R.id.opcionTres));
+        opcion3.setOnClickListener(this);
+        this.opcion4 =((Button)getView().findViewById(R.id.opcionCuatro));
+        opcion4.setOnClickListener(this);
+
+
+        setCanciones();
+
+
+
+
 
         this.Puntaje = ((TextView)getView().findViewById(R.id.puntaje));
-
         puntaje2= (int) 0;
+    }
 
+    public void BotonClick(){
 
     }
 
 
     public void onClick(View view) {
-        if (botonOk == view) {
-            int id = 555;
+
+         if( opcion1==view){
             if (this.Validar()) {
                 puntaje2 += 10;
                 this.texto.setText("correcto");
-
                 tiempoDeEspera();
                 this.Puntaje.setText("puntaje: " + puntaje2);
-                LimpiarCampos();
+                opcion1.setEnabled(false);
 
+                x+=1;
+                LimpiarCampos();
+            }
+            else {
+                this.Puntaje.setText("incorrecto");
+                tiempoDeEspera();
+                LimpiarCampos();
+            }
+        }
+        else if(opcion2 ==view){
+            if (this.Validar2()) {
+                puntaje2 += 10;
+                this.texto.setText("correcto");
+                tiempoDeEspera();
+                this.Puntaje.setText("puntaje: " + puntaje2);
+                opcion2.setEnabled(false);
+
+                x+=1;
+                LimpiarCampos();
 
             }
             else {
                 this.Puntaje.setText("incorrecto");
                 tiempoDeEspera();
                 LimpiarCampos();
-
-
             }
+
+        }
+        else if(opcion3 ==view){
+            if (this.Validar()) {
+                puntaje2 += 10;
+                this.texto.setText("correcto");
+                tiempoDeEspera();
+                this.Puntaje.setText("puntaje: " + puntaje2);
+                opcion3.setEnabled(false);
+
+                x+=1;
+                LimpiarCampos();
+            }
+            else {
+                this.Puntaje.setText("incorrecto");
+                tiempoDeEspera();
+                LimpiarCampos();
+            }
+
+        }
+        else if(opcion4 ==view){
+            if (this.Validar()) {
+                puntaje2 += 10;
+                this.texto.setText("correcto");
+                tiempoDeEspera();
+                this.Puntaje.setText("puntaje: " + puntaje2);
+                opcion4.setEnabled(false);
+
+                x+=1;
+                LimpiarCampos();
+            }
+            else {
+                this.Puntaje.setText("incorrecto");
+                tiempoDeEspera();
+                LimpiarCampos();
+            }
+
         }
 
     }
 
+
     private void tiempoDeEspera()
     {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(700);
         } catch(InterruptedException e) {}
     }
 
 
     public void LimpiarCampos(){
-        this.texto.setText("");
-        this.palabraIngresada.setText("");
+        if (x>=2) {
+            this.texto.setText("");
+            this.opcion1.setText("");
+            this.opcion2.setText("");
+            this.opcion3.setText("");
+            this.opcion4.setText("");
+            x=0;
+        }
 
     }
+    public void RellenarCampos(){
+        this.opcion1.setText("lala");
+        this.opcion2.setText("lala");
+        this.opcion3.setText("lala");
+        this.opcion4.setText("lala");
+    }
 
+    CancionRep canciones = new CancionRep();
 
     private boolean Validar(){
+        canciones.setPalabraCorrectaUno("hola");
+        String opcion1 = this.opcion1.getText().toString();
+        opcion1.equals(canciones.getPalabraCorrectaUno()) ;{return true;}
+    }
+    private boolean Validar2() {
+        canciones.setPalabraCorrectaDos("chau");
+        String opcion2 = this.opcion1.getText().toString();
+        opcion2.equals(canciones.getPalabraCorrectaDos());
+        {
+            return true;
+        }
+    }
 
-        String nom = this.palabraIngresada.getText().toString();
+    public void setCanciones(){
+        this.opcion1.setText("hola");
+        this.opcion2.setText("chau");
+        this.opcion3.setText("perro");
+        this.opcion4.setText("gato");
 
-        return nom.equals("hola");
+
     }
 
 
