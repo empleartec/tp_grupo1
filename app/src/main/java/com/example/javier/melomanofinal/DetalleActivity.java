@@ -10,7 +10,7 @@ import android.view.View;
  */
 public class DetalleActivity extends AppCompatActivity {
     public static final String EXTRA_URL = "url";
-    private Genero genero;
+    private String genero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class DetalleActivity extends AppCompatActivity {
         }
 
 
-        this.genero = (Genero) getIntent().getParcelableExtra("genero");
+        this.genero = getIntent().getStringExtra("genero");
 
         setContentView(R.layout.activity_detalle);
         Bundle extras = getIntent().getExtras();

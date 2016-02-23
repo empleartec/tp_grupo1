@@ -19,18 +19,7 @@ public class RankingTotalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking_total);
-        final RankingFragment fragment = (RankingFragment) getSupportFragmentManager().findFragmentById(R.id.rankingTotalFragment);
-        MelomanoService meServices = ConexionServidor.createMelomanoService();
-        meServices.getPuntaje(new Callback<List<PuntajeDePartida>>() {
-            @Override
-            public void success(List<PuntajeDePartida> pjs, Response response) {
-                fragment.armarlista(pjs);
-            }
 
-            @Override
-            public void failure(RetrofitError error) {
 
-            }
-        });
     }
 }

@@ -33,8 +33,8 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
         return view;
 
     }
-    public void setDiscipline(Genero genero) {
-        ((TextView)getView().findViewById(R.id.GeneroSeleccionado)).setText(genero.getNombre());
+    public void setDiscipline(String genero) {
+        ((TextView)getView().findViewById(R.id.GeneroSeleccionado)).setText(genero);
        this.texto= ((TextView)getView().findViewById(R.id.GeneroSeleccionado));
         this.palabraIngresada= ((EditText)getView().findViewById(R.id.editText));
         this.botonOk=((Button)getView().findViewById(R.id.BotonOk));

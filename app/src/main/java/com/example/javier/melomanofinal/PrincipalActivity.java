@@ -20,12 +20,12 @@ public class PrincipalActivity extends AppCompatActivity {
 
     public void jugar(View v){
         Intent i = new Intent(this, MainActivity.class);
-        startActivity(new Intent());
+        startActivity(i);
     }
 
     public void abrirActivityRanking(View v){
         Intent i = new Intent(this, RankingTotalActivity.class);
-        startActivity(new Intent());
+        startActivity(i);
     }
 
 }

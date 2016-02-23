@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity  implements ListGenero.OnDis
 
     }
 
-    public void onDisciplineSelected(Genero genero) {
+    public void onDisciplineSelected(String genero) {
 
         boolean dual_pane = getResources().getBoolean(R.bool.dual_plane);
         if (dual_pane) {
