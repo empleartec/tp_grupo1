@@ -49,7 +49,7 @@ public class RankingAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = LayoutInflater.from(context.getActivity()).inflate(R.layout.item, parent, false);
+        View view = LayoutInflater.from(context.getActivity()).inflate(R.layout.itemranking, parent, false);
         final PuntajeDePartida puntaje = getItem(position);
         setContenido(view, puntaje);
         setOnClick(view, puntaje);

@@ -28,6 +28,6 @@ import retrofit.http.Path;
     @GET("/puntajes/{generos}")
     void getPuntajePorGenero(@Path("generos")String genero,Callback<List<PuntajeDePartida>>callback);
 
-    @POST("/puntajes")
-    void setPuntaje(@Body PuntajeDePartida task, Callback<PuntajeDePartida> cb);
+    @POST("/puntajess")
+    void setPuntaje(@Body PuntajeDePartida task, Callback<Boolean> cb);
 }

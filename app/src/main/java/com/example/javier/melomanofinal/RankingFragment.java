@@ -53,4 +53,21 @@ public class RankingFragment extends Fragment {
         lista.setAdapter(listaAdaptada);
     }
 
+    public void armarlista(String genero ){
+        MelomanoService meServices = ConexionServidor.createMelomanoService();
+        meServices.getPuntajePorGenero(genero, new Callback<List<PuntajeDePartida>>() {
+            @Override
+            public void success(List<PuntajeDePartida> pjs, Response response) {
+                armarlista(pjs, getView());
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+
+    }
+
 }
