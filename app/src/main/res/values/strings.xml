@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">MelomanoFinal</string>
     <string name="title_activity_principal">PrincipalActivity</string>
+    <string name="Play">Jugar</string>
+    <string name="Ranking">Ver Mejores Puntajes</string>
+    <string name="Top10AllGenres">Estos son los 10 mejores puntajes del juego, incluidos todos los generos</string>
+    <string name="GreetingsMessage">Gracias por jugar tu puntuacion fue:</string>
+    <string name="EnterName">Por favor ingrese su nombre:</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
