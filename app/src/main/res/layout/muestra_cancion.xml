@@ -22,26 +22,46 @@
         android:layout_gravity="center"
 
         />
+    <Button
+        android:id="@+id/opcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="opcion1"/>
 
     <Button
-        android:id="@+id/BotonOk"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="OK"/>
-    <Button
-        android:id="@+id/opcion1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="opcion 1"/>
-    <Button
-        android:id="@+id/opcion2"
+        android:id="@+id/opcionDos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="opcion2"/>
     <Button
-    android:id="@+id/opcion3"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="opcion3"/>
+        android:id="@+id/opcionTres"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="opcion3"/>
+    <Button
+        android:id="@+id/opcionCuatro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="opcion4"/>
+
+    <TextView
+        android:text="¿Como es el nombre de la cancion?"
+        android:textSize="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        />
+    <Button
+        android:id="@+id/nombreCancion1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="opcion4"/>
+    <Button
+        android:id="@+id/nombreCancion2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="opcion4"/>
+
+
 
 </LinearLayout>
