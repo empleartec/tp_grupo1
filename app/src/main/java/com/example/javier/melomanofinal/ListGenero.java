@@ -1,13 +1,11 @@
 package com.example.javier.melomanofinal;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.List;
@@ -25,7 +23,7 @@ public class ListGenero extends Fragment {
                 container, false);
 
         ListView lista = (ListView) view.findViewById(R.id.listageneros);
-        Adapter listaAdaptada = new Adapter( this, GeneroStore.getAll(this.getActivity()));
+        GenerosAdapter listaAdaptada = new GenerosAdapter( this, GeneroStore.getAll(this.getActivity()));
         lista.setAdapter(listaAdaptada);
         return view;
     }
@@ -33,7 +31,7 @@ public class ListGenero extends Fragment {
     public void armarLista(List<Genero> generos) {
 
         ListView lista = (ListView) getView().findViewById(R.id.listageneros);
-        Adapter listaAdaptada = new Adapter(this, generos);
+        GenerosAdapter listaAdaptada = new GenerosAdapter(this, generos);
         lista.setAdapter(listaAdaptada);
     }
 

@@ -18,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Jugar"
+        android:onClick="jugar"
         />
 
     <Button
@@ -26,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Mejor Puntaje"
+        android:onClick="abrirActivityRanking"
         />
 
 </LinearLayout>

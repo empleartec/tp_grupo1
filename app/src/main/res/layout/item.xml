@@ -9,8 +9,6 @@
         android:textColor="@color/colorPrimaryDark"
         android:layout_gravity="center"
         android:textSize="25dp"
-
-
         />
 
 </LinearLayout>

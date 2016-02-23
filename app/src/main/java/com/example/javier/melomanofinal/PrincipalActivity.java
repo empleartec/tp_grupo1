@@ -16,13 +16,16 @@ public class PrincipalActivity extends AppCompatActivity {
         setContentView(R.layout.principal);
 
 
+    }
 
-        findViewById(R.id.BotonJugar).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(PrincipalActivity.this, MainActivity.class));
-            }
-        });
+    public void jugar(View v){
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(new Intent());
+    }
+
+    public void abrirActivityRanking(View v){
+        Intent i = new Intent(this, RankingTotalActivity.class);
+        startActivity(new Intent());
     }
 
 }

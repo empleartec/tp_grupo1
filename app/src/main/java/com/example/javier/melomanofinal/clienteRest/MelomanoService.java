@@ -1,9 +1,14 @@
 package com.example.javier.melomanofinal.clienteRest;
 
+import com.example.javier.melomanofinal.dominio.Cancion;
+import com.example.javier.melomanofinal.dominio.PuntajeDePartida;
+
 import java.util.List;
 
 import retrofit.Callback;
+import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.POST;
 import retrofit.http.Path;
 
 /**
@@ -11,15 +16,18 @@ import retrofit.http.Path;
  */
     public interface MelomanoService {
 
-   //@GET("/generos")
-    //void getGeneros(Callback<List<String>> callback);
+   @GET("/generos")
+    void getGeneros(Callback<List<String>> callback);
 
-//    @GET("/canciones/{genero}")
-  //  void getCancionPorGenero(@Path("genero") String genero, Callback<List<Cancion>> callback);
+    @GET("/canciones/{genero}")
+    void getCancionPorGenero(@Path("genero") String genero, Callback<List<Cancion>> callback);
 
-    //@GET("/puntajes")
-    //void getPuntaje(Callback<List<PuntajeDePartida>> callback);
+    @GET("/puntajes")
+    void getPuntaje(Callback<List<PuntajeDePartida>> callback);
 
-//    @GET("/puntajes/{generos}")
-  //  void getPuntajePorGenero(@Path("generos")String genero,Callback<List<PuntajeDePartida>>callback);
+    @GET("/puntajes/{generos}")
+    void getPuntajePorGenero(@Path("generos")String genero,Callback<List<PuntajeDePartida>>callback);
+
+    @POST("/puntajes")
+    void setPuntaje(@Body PuntajeDePartida task, Callback<PuntajeDePartida> cb);
 }
