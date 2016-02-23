@@ -9,7 +9,7 @@ public class ConexionServidor {
     public static MelomanoService createMelomanoService() {
         String SERVER_IP = "10.12.0.200";
         String SERVER_IP_GENY = "127.0.0.1";
-        String API_URL = "http://10.12.0.200:9000";
+        String API_URL = "http://10.54.11.108:9800";
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(API_URL).build();
         MelomanoService cancionesService = restAdapter.create(MelomanoService.class);
         return cancionesService;

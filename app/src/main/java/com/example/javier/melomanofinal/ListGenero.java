@@ -1,16 +1,23 @@
 package com.example.javier.melomanofinal;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.example.javier.melomanofinal.adapter.GenerosAdapter;
+import com.example.javier.melomanofinal.clienteRest.ConexionServidor;
+import com.example.javier.melomanofinal.clienteRest.MelomanoService;
+import com.example.javier.melomanofinal.dominio.PuntajeDePartida;
+
 import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by Javier on 01/02/2016.
@@ -21,24 +28,36 @@ public class ListGenero extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.lista_genero,
+        final View view = inflater.inflate(R.layout.lista_genero,
                 container, false);
+        final ListGenero fragment = this;
+        MelomanoService meServices = ConexionServidor.createMelomanoService();
+        meServices.getGeneros(new Callback<List<String>>() {
+            @Override
+            public void success(List<String> genres, Response response) {
+                ListView lista = (ListView) view.findViewById(R.id.listageneros);
+                GenerosAdapter listaAdaptada = new GenerosAdapter(fragment, genres);
+                lista.setAdapter(listaAdaptada);
+            }
 
-        ListView lista = (ListView) view.findViewById(R.id.listageneros);
-        Adapter listaAdaptada = new Adapter( this, GeneroStore.getAll(this.getActivity()));
-        lista.setAdapter(listaAdaptada);
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+
         return view;
     }
 
-    public void armarLista(List<Genero> generos) {
+    public void armarLista(List<String> generos) {
 
         ListView lista = (ListView) getView().findViewById(R.id.listageneros);
-        Adapter listaAdaptada = new Adapter(this, generos);
+        GenerosAdapter listaAdaptada = new GenerosAdapter(this, generos);
         lista.setAdapter(listaAdaptada);
     }
 
     public interface OnDisciplineSelectedListener {
-        void onDisciplineSelected(Genero genero);
+        void onDisciplineSelected(String genero);
     }
 
     @Override
@@ -52,7 +71,7 @@ public class ListGenero extends Fragment {
         }
     }
 
-    public void tellTheListenerThatADisciplineWasSelected(Genero generos) {
+    public void tellTheListenerThatADisciplineWasSelected(String generos) {
         listener.onDisciplineSelected(generos);
     }
 

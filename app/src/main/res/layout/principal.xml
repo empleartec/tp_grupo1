@@ -17,7 +17,8 @@
         android:id="@+id/BotonJugar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Jugar"
+        android:text="@string/Play"
+        android:onClick="jugar"
         />
 
     <Button
@@ -25,7 +26,8 @@
         android:id="@+id/BotonPuntaje"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Mejor Puntaje"
+        android:text="@string/Ranking"
+        android:onClick="abrirActivityRanking"
         />
 
 </LinearLayout>

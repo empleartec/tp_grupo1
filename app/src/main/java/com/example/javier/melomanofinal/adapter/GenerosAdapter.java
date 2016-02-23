@@ -1,4 +1,4 @@
-package com.example.javier.melomanofinal;
+package com.example.javier.melomanofinal.adapter;
 
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,18 +8,22 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.javier.melomanofinal.Genero;
+import com.example.javier.melomanofinal.ListGenero;
+import com.example.javier.melomanofinal.R;
+
 import java.util.List;
 
 /**
  * Created by Javier on 01/02/2016.
  */
-public class Adapter extends BaseAdapter{
+public class GenerosAdapter extends BaseAdapter{
 
     private final Fragment context;
-    private final List<Genero> generos;
+    private final List<String> generos;
     private ListGenero listener;
 
-    public Adapter(Fragment context,  List<Genero> generos){
+    public GenerosAdapter(Fragment context, List<String> generos){
 
         this.context = context;
         this.generos = generos;
@@ -35,7 +39,7 @@ public class Adapter extends BaseAdapter{
     }
 
     @Override
-    public Genero getItem(int position) {
+    public String getItem(int position) {
         return generos.get(position);
     }
 
@@ -47,13 +51,13 @@ public class Adapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = LayoutInflater.from(context.getActivity()).inflate(R.layout.item, parent, false);
-        final Genero genero = getItem(position);
+        final String genero = getItem(position);
         setContenido(view, genero);
         setOnClick(view, genero);
         return view;
     }
 
-    private void setOnClick(View view, final Genero genero) {
+    private void setOnClick(View view, final String genero) {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,9 +66,9 @@ public class Adapter extends BaseAdapter{
         });
     }
 
-    private void setContenido(View view, Genero genero) {
+    private void setContenido(View view, String genero) {
         TextView disciplinaNombreView = (TextView) view.findViewById(R.id.texto);
-        disciplinaNombreView.setText(genero.getNombre());
+        disciplinaNombreView.setText(genero);
 
     }
 }
