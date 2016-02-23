@@ -24,13 +24,17 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
     Button opcion2;
     Button opcion3;
     Button opcion4;
+    Button nombreCancion1;
+    Button nombreCancion2;
     int x;
+    CancionRep canciones;
 
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.muestra_cancion, container, false);
+        canciones = new CancionRep("hola","chau","zxc","zxcz");
         return view;
 
     }
@@ -46,6 +50,10 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
         opcion3.setOnClickListener(this);
         this.opcion4 =((Button)getView().findViewById(R.id.opcionCuatro));
         opcion4.setOnClickListener(this);
+        this.nombreCancion1 =((Button)getView().findViewById(R.id.nombreCancion1));
+        nombreCancion1.setOnClickListener(this);
+        this.nombreCancion2 =((Button)getView().findViewById(R.id.nombreCancion2));
+        nombreCancion2.setOnClickListener(this);
 
 
         setCanciones();
@@ -79,6 +87,7 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
             else {
                 this.Puntaje.setText("incorrecto");
                 tiempoDeEspera();
+                x+=2;
                 LimpiarCampos();
             }
         }
@@ -97,12 +106,13 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
             else {
                 this.Puntaje.setText("incorrecto");
                 tiempoDeEspera();
+                x+=2;
                 LimpiarCampos();
             }
 
         }
         else if(opcion3 ==view){
-            if (this.Validar()) {
+            if (this.Validar3()) {
                 puntaje2 += 10;
                 this.texto.setText("correcto");
                 tiempoDeEspera();
@@ -115,12 +125,13 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
             else {
                 this.Puntaje.setText("incorrecto");
                 tiempoDeEspera();
+                x+=2;
                 LimpiarCampos();
             }
 
         }
         else if(opcion4 ==view){
-            if (this.Validar()) {
+            if (this.Validar4()) {
                 puntaje2 += 10;
                 this.texto.setText("correcto");
                 tiempoDeEspera();
@@ -133,6 +144,7 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
             else {
                 this.Puntaje.setText("incorrecto");
                 tiempoDeEspera();
+                x+=2;
                 LimpiarCampos();
             }
 
@@ -167,20 +179,24 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
         this.opcion4.setText("lala");
     }
 
-    CancionRep canciones = new CancionRep();
 
     private boolean Validar(){
-        canciones.setPalabraCorrectaUno("hola");
         String opcion1 = this.opcion1.getText().toString();
-        opcion1.equals(canciones.getPalabraCorrectaUno()) ;{return true;}
+        return opcion1.equals(canciones.getPalabraCorrectaUno()) ;
     }
     private boolean Validar2() {
-        canciones.setPalabraCorrectaDos("chau");
-        String opcion2 = this.opcion1.getText().toString();
-        opcion2.equals(canciones.getPalabraCorrectaDos());
-        {
-            return true;
-        }
+        String opcion2 = this.opcion2.getText().toString();
+        return  opcion2.equals(canciones.getPalabraCorrectaDos());
+
+    }
+    private boolean Validar3() {
+        String opcion3 = this.opcion3.getText().toString();
+        return opcion3.equals(canciones.getPalabraIncorrectaUno());
+
+    }
+    private boolean Validar4() {
+        String opcion4 = this.opcion4.getText().toString();
+        return opcion4.equals(canciones.getPalabraIncorrectaDos());
     }
 
     public void setCanciones(){

@@ -11,10 +11,10 @@ import retrofit.http.Path;
  */
     public interface MelomanoService {
 
-   //@GET("/generos")
-    //void getGeneros(Callback<List<String>> callback);
+  // @GET("/generos")
+   // void getGeneros(Callback<List<String>> callback);
 
-//    @GET("/canciones/{genero}")
+//  @GET("/canciones/{genero}")
   //  void getCancionPorGenero(@Path("genero") String genero, Callback<List<Cancion>> callback);
 
     //@GET("/puntajes")

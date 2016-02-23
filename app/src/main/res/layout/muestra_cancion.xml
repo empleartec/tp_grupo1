@@ -44,6 +44,24 @@
         android:layout_height="wrap_content"
         android:text="opcion4"/>
 
+    <TextView
+        android:text="¿Como es el nombre de la cancion?"
+        android:textSize="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        />
+    <Button
+        android:id="@+id/nombreCancion1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="opcion4"/>
+    <Button
+        android:id="@+id/nombreCancion2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="opcion4"/>
+
 
 
 </LinearLayout>
