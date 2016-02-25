@@ -33,10 +33,10 @@ public class DetalleActivity extends AppCompatActivity {
         }
     }
 
-    public void terminoJugada(View v){
+    public void terminoJugada(int i){
         Intent intent = new Intent(this, PartidaTerminadaActivity.class);
         intent.putExtra("genero", genero);
-        intent.putExtra("puntaje", 10);
+        intent.putExtra("puntaje", i);
         startActivity(intent);
     }
 }

@@ -9,14 +9,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.javier.melomanofinal.clienteRest.ConexionServidor;
+import com.example.javier.melomanofinal.clienteRest.MelomanoService;
+import com.example.javier.melomanofinal.dominio.Cancion;
+
+import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by Javier on 04/02/2016.
  */
 public class MuestraCancionFragment extends Fragment implements View.OnClickListener{
-
+    TextView cancionIncompleta;
     TextView texto;
-    EditText palabraIngresada;
     Button botonOk;
     private TextView Puntaje;
     private int puntaje2;
@@ -26,22 +34,30 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
     Button opcion4;
     Button nombreCancion1;
     Button nombreCancion2;
-    int x;
-    CancionRep canciones;
-
-
+    Cancion cancion;
+    List<Cancion> canciones;
+    String palabraAComparar;
+    private int palabrasIngresadas = 0;
+    private int preguntasContestadas =0 ;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.muestra_cancion, container, false);
-        canciones = new CancionRep("hola","chau","zxc","zxcz");
+
+
         return view;
 
     }
     public void setDiscipline(String genero) {
-        ((TextView)getView().findViewById(R.id.GeneroSeleccionado)).setText(genero);
-       this.texto= ((TextView)getView().findViewById(R.id.GeneroSeleccionado));
-        this.palabraIngresada= ((EditText)getView().findViewById(R.id.editText));
+        ponerReferenciasALosBotones(genero);
+        this.obtenerCanciones(genero);
+
+    }
+
+    public void ponerReferenciasALosBotones(String genero) {
+        this.texto= ((TextView)getView().findViewById(R.id.GeneroSeleccionado));
+        texto.setText(genero);
+        this.cancionIncompleta=((TextView)getView().findViewById(R.id.cancion));
         this.opcion1=((Button)getView().findViewById(R.id.opcion));
         opcion1.setOnClickListener(this);
         this.opcion2 =((Button)getView().findViewById(R.id.opcionDos));
@@ -54,159 +70,101 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
         nombreCancion1.setOnClickListener(this);
         this.nombreCancion2 =((Button)getView().findViewById(R.id.nombreCancion2));
         nombreCancion2.setOnClickListener(this);
-
-
-        setCanciones();
-
-
-
-
-
         this.Puntaje = ((TextView)getView().findViewById(R.id.puntaje));
-        puntaje2= (int) 0;
+        puntaje2 = 0;
     }
 
-    public void BotonClick(){
+    private void obtenerCanciones(String genero) {
+        MelomanoService mserv = ConexionServidor.createMelomanoService();
+        mserv.getCancionPorGenero(getActivity().getIntent().getStringExtra("genero").toLowerCase(), new Callback<List<Cancion>>() {
+            @Override
+            public void success(List<Cancion> cancions, Response response) {
+                canciones = cancions;
+                cancion = canciones.get(0);
+                if(cancion!=null){
+                    rellenarCampos(cancion);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
 
     }
 
+    public void rellenarCampos(Cancion c){
+        this.cancionIncompleta.setText(cancion.getCancionIncompleta());
+        this.opcion1.setText(cancion.getPrimeraPalabra());
+        this.opcion2.setText(cancion.getSegundaPalabra());
+        this.opcion3.setText(cancion.getPalabraIncorrectaUno());
+        this.opcion4.setText(cancion.getPalabraIncorrectaDos());
+        this.nombreCancion1.setText(cancion.getNombre());
+        this.nombreCancion2.setText(cancion.getRespuestaReal());
+        this.palabraAComparar = cancion.getPrimeraPalabra();
+        this.preguntasContestadas = 0;
+        this.palabrasIngresadas = 0 ;
+    }
 
-    public void onClick(View view) {
-
-         if( opcion1==view){
-            if (this.Validar()) {
-                puntaje2 += 10;
-                this.texto.setText("correcto");
-                tiempoDeEspera();
-                this.Puntaje.setText("puntaje: " + puntaje2);
-                opcion1.setEnabled(false);
-
-                x+=1;
-                LimpiarCampos();
-            }
-            else {
-                this.Puntaje.setText("incorrecto");
-                tiempoDeEspera();
-                x+=2;
-                LimpiarCampos();
-            }
+    public void onClick(View v){
+        Button b = (Button) v;
+        if(esUnBotonDePregunta(v)){
+           if( validarPregunta(b)){
+               texto.setText("" + (puntaje2 + 4));
+               puntaje2 = puntaje2 +4;
+           }
         }
-        else if(opcion2 ==view){
-            if (this.Validar2()) {
-                puntaje2 += 10;
-                this.texto.setText("correcto");
-                tiempoDeEspera();
-                this.Puntaje.setText("puntaje: " + puntaje2);
-                opcion2.setEnabled(false);
+        else {
 
-                x+=1;
-                LimpiarCampos();
+            if (this.validar(b)) {
+                texto.setText("" + (puntaje2 + 2));
+                puntaje2 = puntaje2 + 2;
 
             }
-            else {
-                this.Puntaje.setText("incorrecto");
-                tiempoDeEspera();
-                x+=2;
-                LimpiarCampos();
-            }
-
-        }
-        else if(opcion3 ==view){
-            if (this.Validar3()) {
-                puntaje2 += 10;
-                this.texto.setText("correcto");
-                tiempoDeEspera();
-                this.Puntaje.setText("puntaje: " + puntaje2);
-                opcion3.setEnabled(false);
-
-                x+=1;
-                LimpiarCampos();
-            }
-            else {
-                this.Puntaje.setText("incorrecto");
-                tiempoDeEspera();
-                x+=2;
-                LimpiarCampos();
-            }
+            actualizarPalabraAComparar();
 
         }
-        else if(opcion4 ==view){
-            if (this.Validar4()) {
-                puntaje2 += 10;
-                this.texto.setText("correcto");
-                tiempoDeEspera();
-                this.Puntaje.setText("puntaje: " + puntaje2);
-                opcion4.setEnabled(false);
-
-                x+=1;
-                LimpiarCampos();
-            }
-            else {
-                this.Puntaje.setText("incorrecto");
-                tiempoDeEspera();
-                x+=2;
-                LimpiarCampos();
-            }
-
-        }
-
+        verSiHayQueActualizarCancion();
+        verSiNoTerminoPartida();
     }
 
-
-    private void tiempoDeEspera()
-    {
-        try {
-            Thread.sleep(700);
-        } catch(InterruptedException e) {}
+    private void verSiHayQueActualizarCancion() {
+        if(palabrasIngresadas==2 && preguntasContestadas ==1 && !(cancion.getNombre().equals(canciones.get(4).getNombre())))
+            actualizarCancion();
     }
 
-
-    public void LimpiarCampos(){
-        if (x>=2) {
-            this.texto.setText("");
-            this.opcion1.setText("");
-            this.opcion2.setText("");
-            this.opcion3.setText("");
-            this.opcion4.setText("");
-            x=0;
-        }
-
-    }
-    public void RellenarCampos(){
-        this.opcion1.setText("lala");
-        this.opcion2.setText("lala");
-        this.opcion3.setText("lala");
-        this.opcion4.setText("lala");
+    private boolean validarPregunta(Button b) {
+        preguntasContestadas = preguntasContestadas + 1;
+        return cancion.getNombre().equals(b.getText());
     }
 
-
-    private boolean Validar(){
-        String opcion1 = this.opcion1.getText().toString();
-        return opcion1.equals(canciones.getPalabraCorrectaUno()) ;
-    }
-    private boolean Validar2() {
-        String opcion2 = this.opcion2.getText().toString();
-        return  opcion2.equals(canciones.getPalabraCorrectaDos());
-
-    }
-    private boolean Validar3() {
-        String opcion3 = this.opcion3.getText().toString();
-        return opcion3.equals(canciones.getPalabraIncorrectaUno());
-
-    }
-    private boolean Validar4() {
-        String opcion4 = this.opcion4.getText().toString();
-        return opcion4.equals(canciones.getPalabraIncorrectaDos());
+    public boolean esUnBotonDePregunta(View v){
+        return v == nombreCancion1 || v == nombreCancion2;
     }
 
-    public void setCanciones(){
-        this.opcion1.setText("hola");
-        this.opcion2.setText("chau");
-        this.opcion3.setText("perro");
-        this.opcion4.setText("gato");
-
-
+    private void actualizarCancion() {
+        cancion= canciones.get((canciones.indexOf(cancion)+1));
+        rellenarCampos(cancion);
     }
+
+    private boolean validar(Button b){
+        palabrasIngresadas = palabrasIngresadas + 1;
+        return palabraAComparar.equals(b.getText());
+    }
+
+    private void verSiNoTerminoPartida(){
+       if(palabrasIngresadas==2 && preguntasContestadas ==1&& cancion.getNombre().equals(canciones.get(4).getNombre())) {
+          DetalleActivity activity = (DetalleActivity) getActivity();
+       activity.terminoJugada(puntaje2);}
+    }
+
+    private void actualizarPalabraAComparar() {
+
+        if(palabraAComparar.equals(cancion.getPrimeraPalabra())){palabraAComparar=cancion.getSegundaPalabra();}
+    }
+
 
 
 }
+
