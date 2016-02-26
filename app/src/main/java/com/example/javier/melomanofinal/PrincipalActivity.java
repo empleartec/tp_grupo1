@@ -15,7 +15,6 @@ public class PrincipalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.principal);
 
-
     }
 
     public void jugar(View v){

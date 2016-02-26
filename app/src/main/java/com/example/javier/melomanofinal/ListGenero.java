@@ -23,8 +23,8 @@ import retrofit.client.Response;
  * Created by Javier on 01/02/2016.
  */
 public class ListGenero extends Fragment {
-    private OnDisciplineSelectedListener listener;
-
+    private OnGenreSelectedListener listener;
+    private List<String> generos;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,6 +38,8 @@ public class ListGenero extends Fragment {
                 ListView lista = (ListView) view.findViewById(R.id.listageneros);
                 GenerosAdapter listaAdaptada = new GenerosAdapter(fragment, genres);
                 lista.setAdapter(listaAdaptada);
+                generos = genres;
+                pasarGeneros(genres);
             }
 
             @Override
@@ -50,29 +52,37 @@ public class ListGenero extends Fragment {
     }
 
     public void armarLista(List<String> generos) {
-
         ListView lista = (ListView) getView().findViewById(R.id.listageneros);
-        GenerosAdapter listaAdaptada = new GenerosAdapter(this, generos);
-        lista.setAdapter(listaAdaptada);
+        //ListDisciplinasAdapter listaAdaptada = new ListDisciplinasAdapter(this, disciplinas);
+        //lista.setAdapter(listaAdaptada);
+        ((GenerosAdapter)lista.getAdapter()).setGeneros(generos);
+        ((GenerosAdapter)lista.getAdapter()).notifyDataSetChanged();
     }
 
-    public interface OnDisciplineSelectedListener {
-        void onDisciplineSelected(String genero);
+    public interface OnGenreSelectedListener {
+        void onGenreSelected(String genero);
+        void pasarGeneros(List<String> generos);
     }
 
     @Override
     public void onAttach(Activity context) {
         super.onAttach(context);
-        if (context instanceof OnDisciplineSelectedListener) {
-            listener = (OnDisciplineSelectedListener) context;
+        if (context instanceof OnGenreSelectedListener) {
+            listener = (OnGenreSelectedListener) context;
+
         } else {
             throw new ClassCastException(context.toString()
-                    + " must implement DisciplinesListFragment.OnDisciplineSelectedListener");
+                    + " must implement GenreListFragment.OnGenreSelectedListener");
         }
     }
 
-    public void tellTheListenerThatADisciplineWasSelected(String generos) {
-        listener.onDisciplineSelected(generos);
+    public void tellTheListenerThatAGenreWasSelected(String genero) {
+        listener.onGenreSelected(genero);
     }
+
+    public void pasarGeneros(List<String> generos){
+        listener.pasarGeneros(generos);
+    }
+
 
 }

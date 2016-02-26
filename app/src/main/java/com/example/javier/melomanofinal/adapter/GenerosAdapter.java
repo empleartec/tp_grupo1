@@ -20,7 +20,7 @@ import java.util.List;
 public class GenerosAdapter extends BaseAdapter{
 
     private final Fragment context;
-    private final List<String> generos;
+    private  List<String> generos;
     private ListGenero listener;
 
     public GenerosAdapter(Fragment context, List<String> generos){
@@ -61,7 +61,7 @@ public class GenerosAdapter extends BaseAdapter{
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.tellTheListenerThatADisciplineWasSelected(genero);
+                listener.tellTheListenerThatAGenreWasSelected(genero);
             }
         });
     }
@@ -71,4 +71,9 @@ public class GenerosAdapter extends BaseAdapter{
         disciplinaNombreView.setText(genero);
 
     }
+
+    public void setGeneros(List<String> generos){
+        this.generos = generos;
+    }
+
 }

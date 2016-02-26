@@ -48,7 +48,7 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
         return view;
 
     }
-    public void setDiscipline(String genero) {
+    public void setFragmentPorGenero(String genero) {
         ponerReferenciasALosBotones(genero);
         this.obtenerCanciones(genero);
 
@@ -101,7 +101,7 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
         this.opcion3.setText(cancion.getPalabraIncorrectaUno());
         this.opcion4.setText(cancion.getPalabraIncorrectaDos());
         this.nombreCancion1.setText(cancion.getNombre());
-        this.nombreCancion2.setText(cancion.getRespuestaReal());
+        this.nombreCancion2.setText(cancion.getPrimerPregunta());
         this.palabraAComparar = cancion.getPrimeraPalabra();
         this.preguntasContestadas = 0;
         this.palabrasIngresadas = 0 ;
@@ -150,7 +150,7 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
 
     private boolean validar(Button b){
         palabrasIngresadas = palabrasIngresadas + 1;
-        return palabraAComparar.equals(b.getText());
+        return palabraAComparar.equals(b.getText())&&palabrasIngresadas<2;
     }
 
     private void verSiNoTerminoPartida(){

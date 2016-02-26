@@ -1,6 +1,7 @@
 package com.example.javier.melomanofinal;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import retrofit.client.Response;
 
 public class RankingFragment extends Fragment {
 
+    private RankingFragmentListener listener;
     public RankingFragment() {
         // Required empty public constructor
     }
@@ -30,11 +32,17 @@ public class RankingFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_ranking,
                 container, false);
+
+        return view;
+
+    }
+
+    public void armarLista() {
         MelomanoService meServices = ConexionServidor.createMelomanoService();
         meServices.getPuntaje(new Callback<List<PuntajeDePartida>>() {
             @Override
             public void success(List<PuntajeDePartida> pjs, Response response) {
-                armarlista(pjs,view);
+                armarlista(pjs,getView());
 
             }
 
@@ -43,8 +51,6 @@ public class RankingFragment extends Fragment {
 
             }
         });
-        return view;
-
     }
 
     public void armarlista(List<PuntajeDePartida> puntajes,View v ){
@@ -70,4 +76,19 @@ public class RankingFragment extends Fragment {
 
     }
 
+    @Override
+    public void onAttach(Activity context) {
+        super.onAttach(context);
+        if (context instanceof RankingFragmentListener) {
+            listener = (RankingFragmentListener) context;
+            listener.onFragmentCreate(this);
+        } else {
+            throw new ClassCastException(context.toString()
+                    + " must implement GenreListFragment.OnGenreSelectedListener");
+        }
+    }
+
+    public interface RankingFragmentListener {
+        void onFragmentCreate(RankingFragment fragment);
+    }
 }

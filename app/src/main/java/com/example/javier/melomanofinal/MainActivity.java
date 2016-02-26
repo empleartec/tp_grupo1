@@ -1,21 +1,24 @@
 package com.example.javier.melomanofinal;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.Parcelable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.Button;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity  implements ListGenero.OnDisciplineSelectedListener {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity  implements ListGenero.OnGenreSelectedListener {
 
     TextView GenSeleccionado;
     EditText GenIngresado;
+    private List<String> generos = new ArrayList<>();
 
 
     @Override
@@ -24,19 +27,18 @@ public class MainActivity extends AppCompatActivity  implements ListGenero.OnDis
         setContentView(R.layout.activity_main);
         this.GenSeleccionado = (TextView) findViewById(R.id.GeneroSeleccionado);
         this.GenIngresado = (EditText) findViewById(R.id.editText);
-
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbarMain);
+        toolbar.setTitle(R.string.TitleMainActivity);
         setSupportActionBar(toolbar);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void onDisciplineSelected(String genero) {
+    public void onGenreSelected(String genero) {
 
         boolean dual_pane = getResources().getBoolean(R.bool.dual_plane);
         if (dual_pane) {
             MuestraCancionFragment fragment = (MuestraCancionFragment) getSupportFragmentManager().findFragmentById(R.id.detalleFragment);
-            fragment.setDiscipline(genero);
+            fragment.setFragmentPorGenero(genero);
 
         } else {
             Intent intent = new Intent(this, DetalleActivity.class);
@@ -45,9 +47,57 @@ public class MainActivity extends AppCompatActivity  implements ListGenero.OnDis
         }
     }
 
+    @Override
+    public void pasarGeneros(List<String> generos) {
+        this.generos = generos;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_item, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchview = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (query.length() == 0) {
+
+                } else {
+                    List<String> filtradas = filtrar(generos, query);
+                    ((ListGenero) getSupportFragmentManager().findFragmentById(R.id.listFragment)).armarLista(filtradas);
+                }
+                return false;
+            }
 
 
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                List<String> filtradas = filtrar(generos, newText);
+                ((ListGenero) getSupportFragmentManager().findFragmentById(R.id.listFragment)).armarLista(filtradas);
+                return false;
+            }
+        });
+
+        return true;
+    }
+
+    private List<String> filtrar(List<String> generos, String query) {
+        List<String> filtrados = new ArrayList<String>();
+        for(String genero : generos){
+            if(genero.toLowerCase().contains(query.toLowerCase())){
+                filtrados.add(genero);
+            }
+        }
+        return filtrados;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
 }
+
 
 

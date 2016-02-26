@@ -11,12 +11,12 @@
 
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
         android:layout_width="match_parent"
+        android:id="@+id/my_toolbarMain"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        />
+        android:background="@color/colorPrimaryDark"
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"></android.support.v7.widget.Toolbar>
 
 
     <TextView

@@ -3,6 +3,7 @@ package com.example.javier.melomanofinal;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 /**
@@ -29,8 +30,12 @@ public class DetalleActivity extends AppCompatActivity {
             String url = extras.getString(EXTRA_URL);
 
             MuestraCancionFragment detailFragment = (MuestraCancionFragment) getSupportFragmentManager().findFragmentById(R.id.detalleFragment);
-            detailFragment.setDiscipline(genero);
+            detailFragment.setFragmentPorGenero(genero);
         }
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbarDetail);
+        myToolbar.setTitle(genero);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void terminoJugada(int i){

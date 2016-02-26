@@ -1,11 +1,18 @@
 <resources>
-    <string name="app_name">MelomanoFinal</string>
+    <string name="app_name">Melomano</string>
     <string name="title_activity_principal">PrincipalActivity</string>
     <string name="Play">Jugar</string>
+    <string name="BotonFinalizar">Presione para enviar puntaje</string>
+    <string name="TitleRankingPorGenero">Ranking Por Género</string>
+    <string name="TitleMainActivity">Elección De Género</string>
+    <string name="TitleRankingTotal">Ranking</string>
     <string name="Ranking">Ver Mejores Puntajes</string>
     <string name="Top10AllGenres">Estos son los 10 mejores puntajes del juego, incluidos todos los generos</string>
     <string name="GreetingsMessage">Gracias por jugar tu puntuacion fue:</string>
     <string name="EnterName">Por favor ingrese su nombre:</string>
-    <string name="Choose">Por favor elija un genero:</string>
+    <string name="Choose">Por favor escoja un genero:</string>
+    <string name="action_share_discipline">Share</string>
+    <string name="action_search_discipline">Search Discipline</string>
+
 
 </resources>
