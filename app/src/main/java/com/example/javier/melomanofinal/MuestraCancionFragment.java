@@ -150,7 +150,7 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
 
     private boolean validar(Button b){
         palabrasIngresadas = palabrasIngresadas + 1;
-        return palabraAComparar.equals(b.getText())&&palabrasIngresadas<2;
+        return palabraAComparar.equals(b.getText())&&palabrasIngresadas<3;
     }
 
     private void verSiNoTerminoPartida(){
