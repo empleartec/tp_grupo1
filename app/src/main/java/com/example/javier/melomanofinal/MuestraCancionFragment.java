@@ -136,7 +136,7 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
 
     private boolean validarPregunta(Button b) {
         preguntasContestadas = preguntasContestadas + 1;
-        return cancion.getNombre().equals(b.getText());
+        return cancion.getNombre().equals(b.getText())&&preguntasContestadas == 1;
     }
 
     public boolean esUnBotonDePregunta(View v){
@@ -154,7 +154,7 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
     }
 
     private void verSiNoTerminoPartida(){
-       if(palabrasIngresadas==2 && preguntasContestadas ==1&& cancion.getNombre().equals(canciones.get(4).getNombre())) {
+       if(palabrasIngresadas>=2 && preguntasContestadas >=1&& cancion.getNombre().equals(canciones.get(4).getNombre())) {
           DetalleActivity activity = (DetalleActivity) getActivity();
        activity.terminoJugada(puntaje2);}
     }

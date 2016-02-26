@@ -8,6 +8,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity  implements ListGenero.OnGen
     TextView GenSeleccionado;
     EditText GenIngresado;
     private List<String> generos = new ArrayList<>();
+    private android.support.v7.widget.SearchView searchView;
 
 
     @Override
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity  implements ListGenero.OnGen
 
     @Override
     public void pasarGeneros(List<String> generos) {
+        searchView.setVisibility(View.VISIBLE);
         this.generos = generos;
     }
 
@@ -56,8 +59,8 @@ public class MainActivity extends AppCompatActivity  implements ListGenero.OnGen
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_item, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchview = (SearchView) MenuItemCompat.getActionView(searchItem);
-        searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        this.searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -79,6 +82,7 @@ public class MainActivity extends AppCompatActivity  implements ListGenero.OnGen
                 return false;
             }
         });
+        searchView.setVisibility(View.INVISIBLE);
 
         return true;
     }

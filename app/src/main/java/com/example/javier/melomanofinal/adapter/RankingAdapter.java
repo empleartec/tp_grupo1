@@ -67,7 +67,7 @@ public class RankingAdapter extends BaseAdapter {
 
     private void setContenido(View view, PuntajeDePartida puntaje) {
         TextView nombreJugadorView = (TextView) view.findViewById(R.id.nombrejugador);
-        nombreJugadorView.setText(puntaje.getNombre());
+        nombreJugadorView.setText(puntaje.getNombre().toUpperCase());
         TextView generoView = (TextView) view.findViewById(R.id.genero);
         generoView.setText(puntaje.getGenero());
         TextView puntajeView = (TextView) view.findViewById(R.id.puntaje);

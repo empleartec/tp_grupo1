@@ -55,6 +55,8 @@ public class PartidaTerminadaActivity extends AppCompatActivity implements Ranki
                 Log.e("debug", error.getMessage());
             }
         });
+
+       v.setVisibility(View.INVISIBLE);
     }
 
     @Override
