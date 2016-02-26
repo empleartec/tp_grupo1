@@ -130,7 +130,7 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
     }
 
     private void verSiHayQueActualizarCancion() {
-        if(palabrasIngresadas==2 && preguntasContestadas ==1 && !(cancion.getNombre().equals(canciones.get(4).getNombre())))
+        if(palabrasIngresadas>=2 && preguntasContestadas ==1 && !(cancion.getNombre().equals(canciones.get(4).getNombre())))
             actualizarCancion();
     }
 
