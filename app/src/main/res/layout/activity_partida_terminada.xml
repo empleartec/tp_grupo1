@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_weight="1"
         android:layout_height="0dp"
-        android:weightSum="4"
+        android:weightSum="5"
         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
@@ -32,28 +32,37 @@
             android:id="@+id/mensajeDeAgradecimiento"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="4"
             android:layout_height="0dp"
             android:weightSum="3"
             android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.66"
+                android:layout_weight="0.56"
                 android:text="@string/EnterName"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:id="@+id/ingreseNombreTextView"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/PuntajeEnviado"
+                android:id="@+id/textView"
+                android:layout_gravity="center_horizontal" />
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.92"
+                android:layout_weight="1.12"
                 android:id="@+id/editText"/>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1.40"
+                android:layout_weight="1.30"
                 android:onClick="enviarDatos"
-                android:text="@string/BotonFinalizar"
-                android:layout_marginTop="5dp" />
+                android:text="@string/BotonFinalizar" />
 
         </LinearLayout>
     </LinearLayout>

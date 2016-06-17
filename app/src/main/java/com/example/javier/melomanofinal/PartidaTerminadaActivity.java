@@ -32,6 +32,7 @@ public class PartidaTerminadaActivity extends AppCompatActivity implements Ranki
         genero = getIntent().getStringExtra("genero");
         puntaje = getIntent().getIntExtra("puntaje", 0);
         editText = (EditText) findViewById(R.id.editText);
+        findViewById(R.id.textView).setVisibility(View.GONE);
         RankingFragment fragment = (RankingFragment) getSupportFragmentManager().findFragmentById(R.id.rankingPorGeneroFragment);
         fragment.armarlista(genero);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbarTermino);
@@ -55,7 +56,9 @@ public class PartidaTerminadaActivity extends AppCompatActivity implements Ranki
                 Log.e("debug", error.getMessage());
             }
         });
-
+        findViewById(R.id.ingreseNombreTextView).setVisibility(View.INVISIBLE);
+        findViewById(R.id.textView).setVisibility(View.VISIBLE);
+        findViewById(R.id.editText).setVisibility(View.INVISIBLE);
        v.setVisibility(View.INVISIBLE);
     }
 

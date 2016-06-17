@@ -43,5 +43,6 @@ public class DetalleActivity extends AppCompatActivity {
         intent.putExtra("genero", genero);
         intent.putExtra("puntaje", i);
         startActivity(intent);
+        finish();
     }
 }

@@ -22,7 +22,7 @@ import retrofit.client.Response;
 /**
  * Created by Javier on 04/02/2016.
  */
-public class MuestraCancionFragment extends Fragment implements View.OnClickListener{
+public class MuestraCancionFragment extends Fragment implements View.OnClickListener {
     TextView cancionIncompleta;
     TextView texto;
     Button botonOk;
@@ -38,7 +38,7 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
     List<Cancion> canciones;
     String palabraAComparar;
     private int palabrasIngresadas = 0;
-    private int preguntasContestadas =0 ;
+    private int preguntasContestadas = 0;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,6 +48,7 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
         return view;
 
     }
+
     public void setFragmentPorGenero(String genero) {
         ponerReferenciasALosBotones(genero);
         this.obtenerCanciones(genero);
@@ -55,22 +56,22 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
     }
 
     public void ponerReferenciasALosBotones(String genero) {
-        this.texto= ((TextView)getView().findViewById(R.id.GeneroSeleccionado));
+        this.texto = ((TextView) getView().findViewById(R.id.GeneroSeleccionado));
         texto.setText(genero);
-        this.cancionIncompleta=((TextView)getView().findViewById(R.id.cancion));
-        this.opcion1=((Button)getView().findViewById(R.id.opcion));
+        this.cancionIncompleta = ((TextView) getView().findViewById(R.id.cancion));
+        this.opcion1 = ((Button) getView().findViewById(R.id.opcion));
         opcion1.setOnClickListener(this);
-        this.opcion2 =((Button)getView().findViewById(R.id.opcionDos));
+        this.opcion2 = ((Button) getView().findViewById(R.id.opcionDos));
         opcion2.setOnClickListener(this);
-        this.opcion3 =((Button)getView().findViewById(R.id.opcionTres));
+        this.opcion3 = ((Button) getView().findViewById(R.id.opcionTres));
         opcion3.setOnClickListener(this);
-        this.opcion4 =((Button)getView().findViewById(R.id.opcionCuatro));
+        this.opcion4 = ((Button) getView().findViewById(R.id.opcionCuatro));
         opcion4.setOnClickListener(this);
-        this.nombreCancion1 =((Button)getView().findViewById(R.id.nombreCancion1));
+        this.nombreCancion1 = ((Button) getView().findViewById(R.id.nombreCancion1));
         nombreCancion1.setOnClickListener(this);
-        this.nombreCancion2 =((Button)getView().findViewById(R.id.nombreCancion2));
+        this.nombreCancion2 = ((Button) getView().findViewById(R.id.nombreCancion2));
         nombreCancion2.setOnClickListener(this);
-        this.Puntaje = ((TextView)getView().findViewById(R.id.puntaje));
+        this.Puntaje = ((TextView) getView().findViewById(R.id.puntaje));
         puntaje2 = 0;
     }
 
@@ -81,7 +82,7 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
             public void success(List<Cancion> cancions, Response response) {
                 canciones = cancions;
                 cancion = canciones.get(0);
-                if(cancion!=null){
+                if (cancion != null) {
                     rellenarCampos(cancion);
                 }
             }
@@ -94,7 +95,7 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
 
     }
 
-    public void rellenarCampos(Cancion c){
+    public void rellenarCampos(Cancion c) {
         this.cancionIncompleta.setText(cancion.getCancionIncompleta());
         this.opcion1.setText(cancion.getPrimeraPalabra());
         this.opcion2.setText(cancion.getSegundaPalabra());
@@ -104,18 +105,19 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
         this.nombreCancion2.setText(cancion.getPrimerPregunta());
         this.palabraAComparar = cancion.getPrimeraPalabra();
         this.preguntasContestadas = 0;
-        this.palabrasIngresadas = 0 ;
+        this.palabrasIngresadas = 0;
     }
 
-    public void onClick(View v){
+    public void onClick(View v) {
         Button b = (Button) v;
-        if(esUnBotonDePregunta(v)){
-           if( validarPregunta(b)){
-               texto.setText("" + (puntaje2 + 4));
-               puntaje2 = puntaje2 +4;
-           }
-        }
-        else {
+        v.setVisibility(View.INVISIBLE);
+        if (esUnBotonDePregunta(v)) {
+            if (validarPregunta(b)) {
+                texto.setText("" + (puntaje2 + 4));
+                puntaje2 = puntaje2 + 4;
+                desabilitarBotonesDePreguntas();
+            }
+        } else {
 
             if (this.validar(b)) {
                 texto.setText("" + (puntaje2 + 2));
@@ -129,42 +131,71 @@ public class MuestraCancionFragment extends Fragment implements View.OnClickList
         verSiNoTerminoPartida();
     }
 
+    private void desabilitarBotonesDePreguntas() {
+        nombreCancion1.setVisibility(View.INVISIBLE);
+        nombreCancion2.setVisibility(View.INVISIBLE);
+    }
+
     private void verSiHayQueActualizarCancion() {
-        if(palabrasIngresadas>=2 && preguntasContestadas ==1 && !(cancion.getNombre().equals(canciones.get(4).getNombre())))
-            actualizarCancion();
+        if (palabrasIngresadas >= 2 && preguntasContestadas == 1 && !(cancion.getNombre().equals(canciones.get(4).getNombre())))
+        { actualizarCancion();
+        habilitarBotones();}
+    }
+
+    private void habilitarBotones() {
+        opcion1.setVisibility(View.VISIBLE);
+        opcion2.setVisibility(View.VISIBLE);
+        opcion3.setVisibility(View.VISIBLE);
+        opcion4.setVisibility(View.VISIBLE);
+        nombreCancion1.setVisibility(View.VISIBLE);
+        nombreCancion2.setVisibility(View.VISIBLE);
     }
 
     private boolean validarPregunta(Button b) {
         preguntasContestadas = preguntasContestadas + 1;
-        return cancion.getNombre().equals(b.getText())&&preguntasContestadas == 1;
+        return cancion.getNombre().equals(b.getText()) && preguntasContestadas == 1;
     }
 
-    public boolean esUnBotonDePregunta(View v){
+    public boolean esUnBotonDePregunta(View v) {
+
         return v == nombreCancion1 || v == nombreCancion2;
     }
 
     private void actualizarCancion() {
-        cancion= canciones.get((canciones.indexOf(cancion)+1));
+        cancion = canciones.get((canciones.indexOf(cancion) + 1));
         rellenarCampos(cancion);
     }
 
-    private boolean validar(Button b){
+    private boolean validar(Button b) {
         palabrasIngresadas = palabrasIngresadas + 1;
-        return palabraAComparar.equals(b.getText())&&palabrasIngresadas<3;
+        if (palabrasIngresadas == 2) {
+            desabilitarOpcionesDePalabras();
+        }
+        return palabraAComparar.equals(b.getText()) && palabrasIngresadas < 3;
     }
 
-    private void verSiNoTerminoPartida(){
-       if(palabrasIngresadas>=2 && preguntasContestadas >=1&& cancion.getNombre().equals(canciones.get(4).getNombre())) {
-          DetalleActivity activity = (DetalleActivity) getActivity();
-       activity.terminoJugada(puntaje2);}
+    private void desabilitarOpcionesDePalabras() {
+        opcion1.setVisibility(View.INVISIBLE);
+        opcion2.setVisibility(View.INVISIBLE);
+        opcion3.setVisibility(View.INVISIBLE);
+        opcion4.setVisibility(View.INVISIBLE);
+
+    }
+
+    private void verSiNoTerminoPartida() {
+        if (palabrasIngresadas >= 2 && preguntasContestadas >= 1 && cancion.getNombre().equals(canciones.get(4).getNombre())) {
+            DetalleActivity activity = (DetalleActivity) getActivity();
+            activity.terminoJugada(puntaje2);
+        }
     }
 
     private void actualizarPalabraAComparar() {
 
-        if(palabraAComparar.equals(cancion.getPrimeraPalabra())){palabraAComparar=cancion.getSegundaPalabra();}
+        if (palabraAComparar.equals(cancion.getPrimeraPalabra())) {
+            palabraAComparar = cancion.getSegundaPalabra();
+        }
+
+
     }
-
-
-
 }
 
